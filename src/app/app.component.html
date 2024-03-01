@@ -1,0 +1,22 @@
+<table datatable [dtOptions]="dtOptions" class="row-border hover">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of data; let i = index" [class.editing]="i === editedRowIndex">
+      <td *ngIf="i !== editedRowIndex">{{ item.name }}</td>
+      <td *ngIf="i === editedRowIndex"><input type="text" [(ngModel)]="item.name"></td>
+      <td *ngIf="i !== editedRowIndex">{{ item.email }}</td>
+      <td *ngIf="i === editedRowIndex"><input type="email" [(ngModel)]="item.email"></td>
+      <td>
+        <button *ngIf="i !== editedRowIndex" (click)="editRow(i)">Edit</button>
+        <button *ngIf="i === editedRowIndex" (click)="saveRow(i)">Save</button>
+        <button *ngIf="i === editedRowIndex" (click)="cancelEdit(i)">Cancel</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
